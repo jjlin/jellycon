@@ -336,6 +336,34 @@ def show_menu(params):
 
     action_items = []
 
+    can_delete = result.get("CanDelete", False)
+    if can_delete:
+        li = xbmcgui.ListItem(translate_string(30274), offscreen=True)
+        li.setProperty('menu_id', 'delete')
+        action_items.append(li)
+
+    user_data = result.get("UserData", None)
+    if user_data:
+        progress = user_data.get("PlaybackPositionTicks", 0) != 0
+        played = user_data.get("Played", False)
+        if not played or progress:
+            li = xbmcgui.ListItem(translate_string(30270), offscreen=True)
+            li.setProperty('menu_id', 'mark_watched')
+            action_items.append(li)
+        if played or progress:
+            li = xbmcgui.ListItem(translate_string(30271), offscreen=True)
+            li.setProperty('menu_id', 'mark_unwatched')
+            action_items.append(li)
+
+        if user_data.get("IsFavorite", False) is False:
+            li = xbmcgui.ListItem(translate_string(30272), offscreen=True)
+            li.setProperty('menu_id', 'jellyfin_set_favorite')
+            action_items.append(li)
+        else:
+            li = xbmcgui.ListItem(translate_string(30273), offscreen=True)
+            li.setProperty('menu_id', 'jellyfin_unset_favorite')
+            action_items.append(li)
+
     # Additional items to include in the context menu for different item types
     if result["Type"] in ["Episode", "Movie", "Music", "Video", "Audio",
                           "TvChannel", "Program", "MusicVideo"]:
@@ -391,34 +419,6 @@ def show_menu(params):
     if result["Type"] == "Movie":
         li = xbmcgui.ListItem("Show Extras", offscreen=True)
         li.setProperty('menu_id', 'show_extras')
-        action_items.append(li)
-
-    user_data = result.get("UserData", None)
-    if user_data:
-        progress = user_data.get("PlaybackPositionTicks", 0) != 0
-        played = user_data.get("Played", False)
-        if not played or progress:
-            li = xbmcgui.ListItem(translate_string(30270), offscreen=True)
-            li.setProperty('menu_id', 'mark_watched')
-            action_items.append(li)
-        if played or progress:
-            li = xbmcgui.ListItem(translate_string(30271), offscreen=True)
-            li.setProperty('menu_id', 'mark_unwatched')
-            action_items.append(li)
-
-        if user_data.get("IsFavorite", False) is False:
-            li = xbmcgui.ListItem(translate_string(30272), offscreen=True)
-            li.setProperty('menu_id', 'jellyfin_set_favorite')
-            action_items.append(li)
-        else:
-            li = xbmcgui.ListItem(translate_string(30273), offscreen=True)
-            li.setProperty('menu_id', 'jellyfin_unset_favorite')
-            action_items.append(li)
-
-    can_delete = result.get("CanDelete", False)
-    if can_delete:
-        li = xbmcgui.ListItem(translate_string(30274), offscreen=True)
-        li.setProperty('menu_id', 'delete')
         action_items.append(li)
 
     li = xbmcgui.ListItem(translate_string(30398), offscreen=True)
