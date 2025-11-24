@@ -355,57 +355,7 @@ def show_menu(params):
             li.setProperty('menu_id', 'mark_unwatched')
             action_items.append(li)
 
-        if user_data.get("IsFavorite", False) is False:
-            li = xbmcgui.ListItem(translate_string(30272), offscreen=True)
-            li.setProperty('menu_id', 'jellyfin_set_favorite')
-            action_items.append(li)
-        else:
-            li = xbmcgui.ListItem(translate_string(30273), offscreen=True)
-            li.setProperty('menu_id', 'jellyfin_unset_favorite')
-            action_items.append(li)
-
     # Additional items to include in the context menu for different item types
-    if result["Type"] in ["Episode", "Movie", "Music", "Video", "Audio",
-                          "TvChannel", "Program", "MusicVideo"]:
-        li = xbmcgui.ListItem(translate_string(30314), offscreen=True)
-        li.setProperty('menu_id', 'play')
-        action_items.append(li)
-
-    if result["Type"] in ["Season", "MusicArtist", "MusicAlbum", "Playlist",
-                          "MusicGenre"]:
-        li = xbmcgui.ListItem(translate_string(30317), offscreen=True)
-        li.setProperty('menu_id', 'play_all')
-        action_items.append(li)
-
-    if result["Type"] in ["MusicArtist", "MusicAlbum", "Playlist",
-                          "Series", "Season", "MusicGenre"]:
-        li = xbmcgui.ListItem(translate_string(30448), offscreen=True)
-        li.setProperty('menu_id', 'shuffle')
-        action_items.append(li)
-
-    if result["Type"] in ["MusicArtist", "MusicAlbum", "Audio"]:
-        li = xbmcgui.ListItem(translate_string(30449), offscreen=True)
-        li.setProperty('menu_id', 'instant_mix')
-        action_items.append(li)
-
-    if result["Type"] in ["Episode", "Movie", "Video", "TvChannel",
-                          "Program", "MusicVideo"]:
-        li = xbmcgui.ListItem(translate_string(30275), offscreen=True)
-        li.setProperty('menu_id', 'transcode')
-        action_items.append(li)
-
-    if result["Type"] in ["Episode", "Movie", "Music", "Video", "Audio",
-                          "MusicArtist", "MusicAlbum", "MusicVideo",
-                          "MusicGenre"]:
-        li = xbmcgui.ListItem(translate_string(30402), offscreen=True)
-        li.setProperty('menu_id', 'add_to_playlist')
-        action_items.append(li)
-
-    if result["Type"] in ("Movie", "Series"):
-        li = xbmcgui.ListItem(translate_string(30307), offscreen=True)
-        li.setProperty('menu_id', 'play_trailer')
-        action_items.append(li)
-
     if result["Type"] == "Episode" and result["ParentId"] is not None:
         li = xbmcgui.ListItem(translate_string(30327), offscreen=True)
         li.setProperty('menu_id', 'view_season')
@@ -429,11 +379,6 @@ def show_menu(params):
     li.setProperty('menu_id', 'refresh_images')
     action_items.append(li)
 
-    if result["Type"] in ["Movie", "Series"]:
-        li = xbmcgui.ListItem(translate_string(30399), offscreen=True)
-        li.setProperty('menu_id', 'hide')
-        action_items.append(li)
-
     li = xbmcgui.ListItem(translate_string(30401), offscreen=True)
     li.setProperty('menu_id', 'info')
     action_items.append(li)
@@ -447,17 +392,6 @@ def show_menu(params):
     log.debug("View ID:{0} Content type:{1}".format(
         container_view_id, container_content_type)
     )
-
-    if container_content_type in ["movies", "tvshows", "seasons",
-                                  "episodes", "sets"]:
-        if view_match:
-            li = xbmcgui.ListItem("Unset as default view", offscreen=True)
-            li.setProperty('menu_id', 'unset_view')
-            action_items.append(li)
-        else:
-            li = xbmcgui.ListItem("Set as default view", offscreen=True)
-            li.setProperty('menu_id', 'set_view')
-            action_items.append(li)
 
     action_menu = ActionMenu("ActionMenu.xml", PLUGINPATH, "default", "720p")
     action_menu.setActionItems(action_items)
