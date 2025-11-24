@@ -103,6 +103,16 @@ def folder_filter(folder_name: str) -> bool:
         '.pytest_cache',
         '__pycache__',
         'venv',
+
+        '.gitignore',
+        'LICENSE.txt',
+        'Makefile',
+        'README.md',
+        'build.py',
+        'build.sh',
+        'release.yaml',
+        'requirements-dev.txt',
+        'tox.ini',
     ]
     for f in filters:
         if f in folder_name.split(os.path.sep):
