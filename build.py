@@ -69,7 +69,8 @@ def zip_files(py_version: str, source: str, target: str, dev: bool) -> None:
     """
     archive_name = f'plugin.video.jellycon+{py_version}.zip'
 
-    with zipfile.ZipFile(f'{target}/{archive_name}', 'w') as z:
+    with zipfile.ZipFile(f'{target}/{archive_name}', mode='w',
+                         compression=zipfile.ZIP_DEFLATED, compresslevel=9) as z:
         for root, dirs, files in os.walk(args.source):
             for filename in filter(file_filter, files):
                 file_path = os.path.join(root, filename)
