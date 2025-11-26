@@ -275,9 +275,9 @@ def delete(item_id):
         return
 
     return_value = xbmcgui.Dialog().yesno(
-        translate_string(30091), '{}\n{}'.format(
-            final_name, translate_string(30092)
-        )
+        translate_string(30091),
+        f'{final_name}\n{translate_string(30092)}',
+        defaultbutton=xbmcgui.DLG_YESNO_YES_BTN
     )
     if return_value:
         log.debug('Deleting Item: %s', item_id)
