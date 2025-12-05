@@ -276,27 +276,21 @@ def delete(item_id):
         )
         return
 
-    return_value = xbmcgui.Dialog().yesno(
-        translate_string(30091),
-        f'{final_name}\n{translate_string(30092)}',
-        defaultbutton=xbmcgui.DLG_YESNO_YES_BTN
-    )
-    if return_value:
-        log.debug('Deleting Item: {0}'.format(item_id))
-        url = '/Items/{}'.format(item_id)
-        progress = xbmcgui.DialogProgress()
-        progress.create(translate_string(30052), translate_string(30053))
-        api.delete(url)
-        progress.close()
-        check_for_new_content()
-        home_window = HomeWindow()
-        last_url = home_window.get_property("last_content_url")
-        if last_url:
-            home_window.set_property(
-                "skip_cache_for_{}".format(last_url), "true"
-            )
+    log.debug('Deleting Item: {0}'.format(item_id))
+    url = '/Items/{}'.format(item_id)
+    progress = xbmcgui.DialogProgress()
+    progress.create(translate_string(30052), translate_string(30053))
+    api.delete(url)
+    progress.close()
+    check_for_new_content()
+    home_window = HomeWindow()
+    last_url = home_window.get_property("last_content_url")
+    if last_url:
+        home_window.set_property(
+            "skip_cache_for_{}".format(last_url), "true"
+        )
 
-        xbmc.executebuiltin("Container.Refresh")
+    xbmc.executebuiltin("Container.Refresh")
 
 
 def get_params():
