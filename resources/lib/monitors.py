@@ -42,7 +42,7 @@ class ContextMonitor(threading.Thread):
 
                 container_id = xbmc.getInfoLabel("System.CurrentControlID")
                 item_id = xbmc.getInfoLabel(
-                    "Container({}).ListItem.Property(id)".format(container_id)
+                    f"Container({container_id}).ListItem.Property(id)"
                 )
 
                 xbmc.sleep(100)

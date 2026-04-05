@@ -42,7 +42,7 @@ class BitrateDialog(xbmcgui.WindowXMLDialog):
         pass
 
     def onMessage(self, message):
-        log.debug("ActionMenu: onMessage: {0}".format(message))
+        log.debug(f"ActionMenu: onMessage: {message}")
 
     def onAction(self, action):
 
@@ -59,7 +59,7 @@ class BitrateDialog(xbmcgui.WindowXMLDialog):
 
     def onClick(self, control_id):
         if control_id == 3000:
-            log.debug("ActionMenu: Selected Item: {0}".format(control_id))
+            log.debug(f"ActionMenu: Selected Item: {control_id}")
 
 
 class ResumeDialog(xbmcgui.WindowXMLDialog):
@@ -126,7 +126,7 @@ class SafeDeleteDialog(xbmcgui.WindowXMLDialog):
         pass
 
     def onMessage(self, message):
-        log.debug("SafeDeleteDialog: onMessage: {0}".format(message))
+        log.debug(f"SafeDeleteDialog: onMessage: {message}")
 
     def onAction(self, action):
 
@@ -135,7 +135,7 @@ class SafeDeleteDialog(xbmcgui.WindowXMLDialog):
         elif action.getId() == 92:  # ACTION_NAV_BACK
             self.close()
         else:
-            log.debug("SafeDeleteDialog: onAction: {0}".format(action.getId()))
+            log.debug(f"SafeDeleteDialog: onAction: {action.getId()}")
 
     def onClick(self, controlID):
         if controlID == 1:
@@ -177,7 +177,7 @@ class PlayNextDialog(xbmcgui.WindowXMLDialog):
         pass
 
     def onMessage(self, message):
-        log.debug("PlayNextDialog: onMessage: {0}".format(message))
+        log.debug(f"PlayNextDialog: onMessage: {message}")
 
     def onAction(self, action):
 
@@ -186,7 +186,7 @@ class PlayNextDialog(xbmcgui.WindowXMLDialog):
         elif action.getId() == 92:  # ACTION_NAV_BACK
             self.close()
         else:
-            log.debug("PlayNextDialog: onAction: {0}".format(action.getId()))
+            log.debug(f"PlayNextDialog: onAction: {action.getId()}")
 
     def onClick(self, control_id):
         if control_id == 3013:
@@ -194,7 +194,7 @@ class PlayNextDialog(xbmcgui.WindowXMLDialog):
             self.play_called
             self.close()
             next_item_id = self.episode_info.get("Id")
-            log.debug("Playing Next Episode: {0}".format(next_item_id))
+            log.debug(f"Playing Next Episode: {next_item_id}")
             play_info = {}
             play_info["item_id"] = next_item_id
             play_info["auto_resume"] = "-1"
@@ -233,21 +233,21 @@ class SkipDialog(xbmcgui.WindowXMLDialog):
         pass
 
     def onMessage(self, message):
-        log.debug("SkipDialog: onMessage: {0}".format(message))
+        log.debug(f"SkipDialog: onMessage: {message}")
 
     def onAction(self, action):
-        log.debug("SkipDialog: onAction: {0}".format(action.getId()))
+        log.debug(f"SkipDialog: onAction: {action.getId()}")
         if action.getId() == 10 or action.getId() == 92:  # ACTION_PREVIOUS_MENU & ACTION_NAV_BACK
             log.debug("SkipDialog: dismissing dialog so it does not open again")
             self.has_been_dissmissed = True
             self.close()
 
     def onClick(self, control_id):
-        log.debug("SkipDialog: onClick: {0}".format(control_id))
+        log.debug(f"SkipDialog: onClick: {control_id}")
         player = xbmc.Player()
         current_ticks = seconds_to_ticks(player.getTime())
         if self.start is not None and self.end is not None and current_ticks >= self.start and current_ticks <= self.end:
-            log.debug("SkipDialog: skipping segment because current ticks ({0}) is in range".format(current_ticks))
+            log.debug(f"SkipDialog: skipping segment because current ticks ({current_ticks}) is in range")
             # If click during segment, skip it
             player.seekTime(ticks_to_seconds(self.end))
                                         

@@ -54,7 +54,7 @@ def clone_skin():
 
     kodi_path = translate_path("special://xbmc")
     kodi_skin_source = os.path.join(kodi_path, "addons", "skin.estuary")
-    log.debug("Kodi Skin Source: {0}".format(kodi_skin_source))
+    log.debug(f"Kodi Skin Source: {kodi_skin_source}")
 
     pdialog = xbmcgui.DialogProgress()
     pdialog.create("JellyCon Skin Cloner", "")
@@ -62,13 +62,13 @@ def clone_skin():
     all_files = []
     walk_path(kodi_skin_source, "", all_files)
     for found in all_files:
-        log.debug("Found Path: {0}".format(found))
+        log.debug(f"Found Path: {found}")
 
     kodi_home_path = translate_path("special://home")
     kodi_skin_destination = os.path.join(
         kodi_home_path, "addons", "skin.estuary_jellycon"
     )
-    log.debug("Kodi Skin Destination: {0}".format(kodi_skin_destination))
+    log.debug(f"Kodi Skin Destination: {kodi_skin_destination}")
 
     # copy all skin files (clone)
     count = 0
@@ -98,7 +98,7 @@ def clone_skin():
         kodi_home_path, "addons", "plugin.video.jellycon"
     )
 
-    log.debug("Major Version: {0}".format(kodi_version()))
+    log.debug(f"Major Version: {kodi_version()}")
 
     file_list = ["Home.xml",
                  "Includes_Home.xml",
@@ -132,15 +132,13 @@ def clone_skin():
         'enabled': True
     }
     result = JsonRpc('Addons.SetAddonEnabled').execute(params)
-    log.debug("Addons.SetAddonEnabled : {0}".format(result))
+    log.debug(f"Addons.SetAddonEnabled : {result}")
 
-    log.debug("SkinCloner : Current Skin : {}".format(
-        get_value("lookandfeel.skin"))
+    log.debug(f"SkinCloner : Current Skin : {get_value('lookandfeel.skin')}"
     )
     set_result = set_value("lookandfeel.skin", "skin.estuary_jellycon")
-    log.debug("Save Setting : lookandfeel.skin : {0}".format(set_result))
-    log.debug("SkinCloner : Current Skin : {}".format(
-        get_value("lookandfeel.skin"))
+    log.debug(f"Save Setting : lookandfeel.skin : {set_result}")
+    log.debug(f"SkinCloner : Current Skin : {get_value('lookandfeel.skin')}"
     )
 
 

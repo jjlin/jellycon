@@ -31,8 +31,8 @@ def get_content(url, params):
     if not media_type:
         xbmcgui.Dialog().ok(translate_string(30135), translate_string(30139))
 
-    log.debug("URL: {0}".format(url))
-    log.debug("MediaType: {0}".format(media_type))
+    log.debug(f"URL: {url}")
+    log.debug(f"MediaType: {media_type}")
     pluginhandle = int(sys.argv[1])
 
     settings = xbmcaddon.Addon()
@@ -79,7 +79,7 @@ def get_content(url, params):
     elif media_type == "mixed":
         content_type = 'videos'
 
-    log.debug("media_type:{0} content_type:{1} view_type:{2} ".format(media_type, content_type, view_type))
+    log.debug(f"media_type:{media_type} content_type:{content_type} view_type:{view_type} ")
 
     # show a progress indicator if needed
     progress = None
@@ -97,38 +97,38 @@ def get_content(url, params):
     url_next = None
     if not url_limit or start_index > 0:
         if movie_page_limit > 0 and media_type.startswith("movie"):
-            log.debug("UPDATING NEXT URL: {0}".format(url))
-            log.debug("current_start : {0}".format(start_index))
+            log.debug(f"UPDATING NEXT URL: {url}")
+            log.debug(f"current_start : {start_index}")
             if start_index > 0:
                 prev_index = start_index - movie_page_limit
                 if prev_index < 0:
                     prev_index = 0
                 url_prev = re.sub('StartIndex=([0-9]{1,4})', 'StartIndex=' + str(prev_index), url)
                 url_next = re.sub('StartIndex=([0-9]{1,4})', 'StartIndex=' + str(start_index + movie_page_limit), url)
-                log.debug("UPDATING NEXT URL: {0}".format(url_next))
+                log.debug(f"UPDATING NEXT URL: {url_next}")
 
             else:
-                log.debug("ADDING NEXT URL: {0}".format(url))
+                log.debug(f"ADDING NEXT URL: {url}")
                 url_next = url + "&StartIndex=" + str(start_index + movie_page_limit) + "&Limit=" + str(movie_page_limit)
                 url = url + "&StartIndex=" + str(start_index) + "&Limit=" + str(movie_page_limit)
-                log.debug("ADDING NEXT URL: {0}".format(url_next))
+                log.debug(f"ADDING NEXT URL: {url_next}")
 
         if show_page_limit > 0 and media_type.startswith("tvshow"):
-            log.debug("UPDATING NEXT URL: {0}".format(url))
-            log.debug("current_start : {0}".format(start_index))
+            log.debug(f"UPDATING NEXT URL: {url}")
+            log.debug(f"current_start : {start_index}")
             if start_index > 0:
                 prev_index = start_index - show_page_limit
                 if prev_index < 0:
                     prev_index = 0
                 url_prev = re.sub('StartIndex=([0-9]{1,4})', 'StartIndex=' + str(prev_index), url)
                 url_next = re.sub('StartIndex=([0-9]{1,4})', 'StartIndex=' + str(start_index + show_page_limit), url)
-                log.debug("UPDATING NEXT URL: {0}".format(url_next))
+                log.debug(f"UPDATING NEXT URL: {url_next}")
 
             else:
-                log.debug("ADDING NEXT URL: {0}".format(url))
+                log.debug(f"ADDING NEXT URL: {url}")
                 url_next = url + "&StartIndex=" + str(start_index + show_page_limit) + "&Limit=" + str(show_page_limit)
                 url = url + "&StartIndex=" + str(start_index) + "&Limit=" + str(show_page_limit)
-                log.debug("ADDING NEXT URL: {0}".format(url_next))
+                log.debug(f"ADDING NEXT URL: {url_next}")
 
     use_cache = params.get("use_cache", "true") == "true"
 
@@ -136,7 +136,7 @@ def get_content(url, params):
     if dir_items is None:
         return
 
-    log.debug("total_records: {0}".format(total_records))
+    log.debug(f"total_records: {total_records}")
 
     if not url_limit or start_index > 0:
         # add paging items
@@ -145,7 +145,7 @@ def get_content(url, params):
                 list_item = xbmcgui.ListItem("Prev Page (" + str(start_index - movie_page_limit + 1) + "-" + str(start_index) +
                                              " of " + str(total_records) + ")")
                 u = sys.argv[0] + "?url=" + quote(url_prev) + "&mode=GET_CONTENT&media_type=movies"
-                log.debug("ADDING PREV ListItem: {0} - {1}".format(u, list_item))
+                log.debug(f"ADDING PREV ListItem: {u} - {list_item}")
                 dir_items.insert(0, (u, list_item, True))
 
             if start_index + movie_page_limit < total_records:
@@ -155,7 +155,7 @@ def get_content(url, params):
                 list_item = xbmcgui.ListItem("Next Page (" + str(start_index + movie_page_limit + 1) + "-" +
                                              str(upper_count) + " of " + str(total_records) + ")")
                 u = sys.argv[0] + "?url=" + quote(url_next) + "&mode=GET_CONTENT&media_type=movies"
-                log.debug("ADDING NEXT ListItem: {0} - {1}".format(u, list_item))
+                log.debug(f"ADDING NEXT ListItem: {u} - {list_item}")
                 dir_items.append((u, list_item, True))
         # add paging items
         if show_page_limit > 0 and media_type.startswith("tvshow"):
@@ -163,7 +163,7 @@ def get_content(url, params):
                 list_item = xbmcgui.ListItem("Prev Page (" + str(start_index - show_page_limit + 1) + "-" + str(start_index) +
                                              " of " + str(total_records) + ")")
                 u = sys.argv[0] + "?url=" + quote(url_prev) + "&mode=GET_CONTENT&media_type=tvshows"
-                log.debug("ADDING PREV ListItem: {0} - {1}".format(u, list_item))
+                log.debug(f"ADDING PREV ListItem: {u} - {list_item}")
                 dir_items.insert(0, (u, list_item, True))
 
             if start_index + show_page_limit < total_records:
@@ -173,7 +173,7 @@ def get_content(url, params):
                 list_item = xbmcgui.ListItem("Next Page (" + str(start_index + show_page_limit + 1) + "-" +
                                              str(upper_count) + " of " + str(total_records) + ")")
                 u = sys.argv[0] + "?url=" + quote(url_next) + "&mode=GET_CONTENT&media_type=tvshows"
-                log.debug("ADDING NEXT ListItem: {0} - {1}".format(u, list_item))
+                log.debug(f"ADDING NEXT ListItem: {u} - {list_item}")
                 dir_items.append((u, list_item, True))
 
     # set the Kodi content type
@@ -181,7 +181,7 @@ def get_content(url, params):
         xbmcplugin.setContent(pluginhandle, content_type)
     elif detected_type is not None:
         # if the media type is not set then try to use the detected type
-        log.debug("Detected content type: {0}".format(detected_type))
+        log.debug(f"Detected content type: {detected_type}")
         if detected_type == "Movie":
             view_type = "Movies"
             content_type = 'movies'
@@ -205,11 +205,11 @@ def get_content(url, params):
     view_key = "view-" + content_type
     view_id = settings.getSetting(view_key)
     if view_id:
-        log.debug("Setting view for type:{0} to id:{1}".format(view_key, view_id))
+        log.debug(f"Setting view for type:{view_key} to id:{view_id}")
         display_items_notification = {"view_id": view_id}
         send_event_notification("set_view", display_items_notification)
     else:
-        log.debug("No view id for view type:{0}".format(view_key))
+        log.debug(f"No view id for view type:{view_key}")
 
     if progress is not None:
         progress.update(100, translate_string(30125))
@@ -219,7 +219,7 @@ def get_content(url, params):
 
 
 def set_sort(pluginhandle, view_type, default_sort):
-    log.debug("SETTING_SORT for media type: {0}".format(view_type))
+    log.debug(f"SETTING_SORT for media type: {view_type}")
 
     if default_sort == "none":
         xbmcplugin.addSortMethod(pluginhandle, xbmcplugin.SORT_METHOD_UNSORTED)
@@ -236,7 +236,7 @@ def set_sort(pluginhandle, view_type, default_sort):
 
     settings = xbmcaddon.Addon()
     preset_sort_order = settings.getSetting("sort-" + view_type)
-    log.debug("SETTING_SORT preset_sort_order: {0}".format(preset_sort_order))
+    log.debug(f"SETTING_SORT preset_sort_order: {preset_sort_order}")
     if preset_sort_order in sorting_order_mapping:
         xbmcplugin.addSortMethod(pluginhandle, sorting_order_mapping[preset_sort_order])
 
@@ -314,7 +314,7 @@ def process_directory(url, progress, params, use_cache_data=False):
                       '&seasonId=' + season_id +
                       '&IsVirtualUnAired=false' +
                       '&IsMissing=false' +
-                      '&Fields=SpecialEpisodeNumbers,{}'.format(default_filters) +
+                      f'&Fields=SpecialEpisodeNumbers,{default_filters}' +
                       '&format=json')
         if progress is not None:
             progress.close()
@@ -359,7 +359,7 @@ def process_directory(url, progress, params, use_cache_data=False):
             detected_type = item_details.item_type
 
         if item_details.item_type == "Season" and first_season_item is None:
-            log.debug("Setting First Season to : {0}".format(item_details.__dict__))
+            log.debug(f"Setting First Season to : {item_details.__dict__}")
             first_season_item = item_details
 
         total_unwatched += item_details.unwatched_episodes
@@ -377,7 +377,7 @@ def process_directory(url, progress, params, use_cache_data=False):
                 u = ('/Shows/' + item_details.id +
                      '/Seasons'
                      '?userId={userid}' +
-                     '&Fields={}'.format(default_filters) +
+                     f'&Fields={default_filters}' +
                      '&format=json')
                 if not show_empty_folders:
                     u = u + '&isMissing=False'
@@ -389,7 +389,7 @@ def process_directory(url, progress, params, use_cache_data=False):
                      '&seasonId=' + item_details.id +
                      '&IsVirtualUnAired=false' +
                      '&IsMissing=false' +
-                     '&Fields=SpecialEpisodeNumbers,{}'.format(default_filters) +
+                     f'&Fields=SpecialEpisodeNumbers,{default_filters}' +
                      '&format=json')
 
             else:
@@ -397,7 +397,7 @@ def process_directory(url, progress, params, use_cache_data=False):
                      '?ParentId=' + item_details.id +
                      '&IsVirtualUnAired=false' +
                      '&IsMissing=false' +
-                     '&Fields={}'.format(default_filters) +
+                     f'&Fields={default_filters}' +
                      '&format=json')
 
             default_sort = item_details.item_type == "Playlist"
@@ -407,7 +407,7 @@ def process_directory(url, progress, params, use_cache_data=False):
                 if gui_item:
                     dir_items.append(gui_item)
             else:
-                log.debug("Dropping empty folder item : {0}".format(item_details.__dict__))
+                log.debug(f"Dropping empty folder item : {item_details.__dict__}")
 
         elif item_details.item_type == "MusicArtist":
             u = ('/Users/{userid}/items' +
@@ -437,7 +437,7 @@ def process_directory(url, progress, params, use_cache_data=False):
                       '?userId={userid}' +
                       '&IsVirtualUnAired=false' +
                       '&IsMissing=false' +
-                      '&Fields=SpecialEpisodeNumbers,{}'.format(default_filters) +
+                      f'&Fields=SpecialEpisodeNumbers,{default_filters}' +
                       '&format=json')
         played = 0
         overlay = "7"

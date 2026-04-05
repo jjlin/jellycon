@@ -49,7 +49,7 @@ def kodi_version():
 def get_jellyfin_url(path, params):
     params["format"] = "json"
     url_params = urlencode(params)
-    return '{}?{}'.format(path, url_params)
+    return f'{path}?{url_params}'
 
 
 def get_checksum(item):
@@ -88,13 +88,13 @@ def send_event_notification(method, data=None, hexlify=False):
     if hexlify:
         # Used exclusively for the upnext plugin
         data_str = ensure_text(binascii.hexlify(ensure_binary(data_str)))
-        data = '["{}"]'.format(data_str)
+        data = f'["{data_str}"]'
     else:
         data = '"[{}]"'.format(data_str.replace('"', '\\"'))
 
     sender = 'plugin.video.jellycon'
 
-    xbmc.executebuiltin('NotifyAll({}, {}, {})'.format(sender, method, data))
+    xbmc.executebuiltin(f'NotifyAll({sender}, {method}, {data})')
 
 
 def datetime_from_string(time_string):
@@ -141,7 +141,7 @@ def convert_size(size_bytes):
     i = int(math.floor(math.log(size_bytes, 1024)))
     p = math.pow(1024, i)
     s = round(size_bytes / p, 2)
-    return "{} {}".format(s, size_name[i])
+    return f"{s} {size_name[i]}"
 
 
 def translate_string(string_id):
@@ -161,32 +161,32 @@ def get_device_id():
     hashed_name = hashlib.md5(username.encode()).hexdigest()
 
     if client_id and username:
-        return '{}-{}'.format(client_id, hashed_name)
+        return f'{client_id}-{hashed_name}'
     elif client_id and not username:
         # Quick Connect, needs to be unique so sessions don't overwrite
         rand_id = uuid4().hex
-        return '{}-{}'.format(client_id, rand_id)
+        return f'{client_id}-{rand_id}'
 
     jellyfin_guid_path = py2_decode(
         translate_path("special://temp/jellycon_guid")
     )
-    log.debug("jellyfin_guid_path: {0}".format(jellyfin_guid_path))
+    log.debug(f"jellyfin_guid_path: {jellyfin_guid_path}")
     guid = xbmcvfs.File(jellyfin_guid_path)
     client_id = guid.read()
     guid.close()
 
     if not client_id:
         client_id = uuid4().hex
-        log.debug("Generating a new guid: {0}".format(client_id))
+        log.debug(f"Generating a new guid: {client_id}")
         guid = xbmcvfs.File(jellyfin_guid_path, 'w')
         guid.write(client_id)
         guid.close()
-        log.debug("jellyfin_client_id (NEW): {0}".format(client_id))
+        log.debug(f"jellyfin_client_id (NEW): {client_id}")
     else:
-        log.debug("jellyfin_client_id: {0}".format(client_id))
+        log.debug(f"jellyfin_client_id: {client_id}")
 
     window.set_property("client_id", client_id)
-    return '{}-{}'.format(client_id, hashed_name)
+    return f'{client_id}-{hashed_name}'
 
 
 def get_version():
@@ -337,8 +337,8 @@ def get_art_url(data, art_type, parent=False, index=0, server=None):
             tag_name = 'SeriesPrimaryImageTag'
             id_name = 'SeriesId'
         else:
-            tag_name = 'Parent{}ImageTag'.format(art_type)
-            id_name = 'Parent{}ItemId'.format(art_type)
+            tag_name = f'Parent{art_type}ImageTag'
+            id_name = f'Parent{art_type}ItemId'
         parent_image_id = data.get(id_name)
         parent_image_tag = data.get(tag_name)
         if parent_image_id is not None and parent_image_tag is not None:
@@ -363,9 +363,9 @@ def image_url(item_id, art_type, index, width, height, image_tag, server):
         server, item_id, art_type, index, image_tag
     )
     if int(width) > 0:
-        artwork += '&MaxWidth={}'.format(width)
+        artwork += f'&MaxWidth={width}'
     if int(height) > 0:
-        artwork += '&MaxHeight={}'.format(height)
+        artwork += f'&MaxHeight={height}'
 
     return artwork
 
@@ -433,9 +433,9 @@ def download_external_sub(language, codec, url, title):
     r.raise_for_status()
 
     # Write the subtitle file to the local filesystem
-    file_name = 'Stream.{}.{}.{}'.format(title, language, codec)
+    file_name = f'Stream.{title}.{language}.{codec}'
     file_path = py2_decode(
-        translate_path('special://temp/{}'.format(file_name))
+        translate_path(f'special://temp/{file_name}')
     )
     with open(file_path, 'wb') as f:
         f.write(r.content)

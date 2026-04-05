@@ -72,7 +72,7 @@ def get_image_links(url):
 def build_image(path):
     log.debug("build_image()")
 
-    log.debug("Request Path : {0}".format(path))
+    log.debug(f"Request Path : {path}")
 
     request_path = path[1:]
 
@@ -80,7 +80,7 @@ def build_image(path):
         return []
 
     decoded_url = ensure_text(base64.b64decode(request_path))
-    log.debug("decoded_url : {0}".format(decoded_url))
+    log.debug(f"decoded_url : {decoded_url}")
 
     image_urls = get_image_links(decoded_url)
 
@@ -105,10 +105,10 @@ def build_image(path):
             url_path = url_bits.path
             url_query = url_bits.query
 
-            server = "%s:%s" % (host_name, port)
+            server = f"{host_name}:{port}"
             url_full_path = url_path + "?" + url_query
 
-            log.debug("Loading image from : {0} {1} {2}".format(image_count, server, url_full_path))
+            log.debug(f"Loading image from : {image_count} {server} {url_full_path}")
 
             try:
                 image_response = requests.get(thumb_url)
@@ -126,7 +126,7 @@ def build_image(path):
                 del image_data
 
             except Exception as con_err:
-                log.debug("Error loading image : {0}".format(con_err))
+                log.debug(f"Error loading image : {con_err}")
 
             image_count += 1
 
@@ -177,7 +177,7 @@ class HttpImageHandler(BaseHTTPRequestHandler):
             self.send_response(200)
             self.send_header('Content-type', 'image/png')
             modified = xbmcvfs.Stat(image_path).st_mtime()
-            self.send_header('Last-Modified', "%s" % modified)
+            self.send_header('Last-Modified', f"{modified}")
             image = xbmcvfs.File(image_path)
             size = image.size()
             self.send_header('Content-Length', str(size))

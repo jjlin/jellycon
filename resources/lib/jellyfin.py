@@ -35,7 +35,7 @@ class API:
             self.settings = xbmcaddon.Addon()
             self.server = self.settings.getSetting('server_address')
 
-        url = '{}{}'.format(self.server, path)
+        url = f'{self.server}{path}'
 
         r = requests.get(url, headers=self.headers, verify=self.verify_cert)
         try:
@@ -59,7 +59,7 @@ class API:
         if 'Authorization' not in self.headers or self.token not in self.headers:
             self.create_headers(True)
 
-        url = '{}{}'.format(self.server, url)
+        url = f'{self.server}{url}'
 
         r = requests.post(url, json=payload, headers=self.headers, verify=self.verify_cert)
         try:
@@ -76,7 +76,7 @@ class API:
         if 'Authorization' not in self.headers or self.token not in self.headers:
             self.create_headers(True)
 
-        url = '{}{}'.format(self.server, url)
+        url = f'{self.server}{url}'
 
         requests.delete(url, headers=self.headers, verify=self.verify_cert)
 
@@ -123,14 +123,14 @@ class API:
 
         # If we have a valid token, ensure it's included in the headers unless we're regenerating
         if self.token and force is False:
-            headers['Authorization'] += ", Token={}".format(self.token)
+            headers['Authorization'] += f", Token={self.token}"
         else:
             # Check for updated credentials since initialization
             user_details = load_user_details()
             token = user_details.get('token')
             if token:
                 self.token = token
-                headers['Authorization'] += ", Token={}".format(self.token)
+                headers['Authorization'] += f", Token={self.token}"
 
         # Make headers available to api calls
         self.headers = headers
@@ -180,7 +180,7 @@ class API:
     def speedtest(self, test_data_size):
         self.create_headers()
 
-        url = '{}/playback/bitratetest?size={}'.format(self.server, test_data_size)
+        url = f'{self.server}/playback/bitratetest?size={test_data_size}'
         # Because this needs the stream argument, this doesn't go through self.get()
         response = requests.get(url, stream=True, headers=self.headers, verify=self.verify_cert)
 

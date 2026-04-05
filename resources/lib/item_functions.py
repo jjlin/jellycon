@@ -166,7 +166,7 @@ def extract_item_info(item, gui_options):
             name_info["SeriesName"] = ""
         name_info["SeasonIndex"] = u"%02d" % item_details.season_number
         name_info["EpisodeIndex"] = u"%02d" % item_details.episode_number
-        log.debug("FormatName: {0} | {1}".format(name_format, name_info))
+        log.debug(f"FormatName: {name_format} | {name_info}")
         item_details.name = ensure_text(name_format).format(**name_info).strip()
 
     year = item.get("ProductionYear")
@@ -348,7 +348,7 @@ def add_gui_item(url, item_details, display_options, folder=True, default_sort=F
         return None
 
     if item_details.mode:
-        mode = "&mode=%s" % item_details.mode
+        mode = f"&mode={item_details.mode}"
     else:
         mode = "&mode=0"
 
@@ -385,13 +385,13 @@ def add_gui_item(url, item_details, display_options, folder=True, default_sort=F
     add_counts = display_options["addCounts"]
     if add_counts and item_details.unwatched_episodes != 0:
         counts_added = True
-        list_item_name = list_item_name + (" (%s)" % item_details.unwatched_episodes)
+        list_item_name = list_item_name + f" ({item_details.unwatched_episodes})"
 
     add_resume_percent = display_options["addResumePercent"]
     if (not counts_added
             and add_resume_percent
             and capped_percentage not in [0, 100]):
-        list_item_name = list_item_name + (" (%s%%)" % capped_percentage)
+        list_item_name = list_item_name + f" ({capped_percentage}%)"
 
     subtitle_available = display_options["addSubtitleAvailable"]
     if subtitle_available and item_details.subtitle_available:

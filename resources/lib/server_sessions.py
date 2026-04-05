@@ -22,7 +22,7 @@ def show_server_sessions():
     handle = int(sys.argv[1])
 
     user_details = load_user_details()
-    url = "/Users/{}".format(user_details.get('user_id'))
+    url = f"/Users/{user_details.get('user_id')}"
     results = api.get(url)
 
     is_admin = results.get("Policy", {}).get("IsAdministrator", False)
@@ -32,7 +32,7 @@ def show_server_sessions():
 
     url = "/Sessions"
     results = api.get(url)
-    log.debug("session_info: {0}".format(results))
+    log.debug(f"session_info: {results}")
 
     if results is None:
         return
@@ -50,7 +50,7 @@ def show_server_sessions():
         now_playing = session.get("NowPlayingItem", None)
         transcoding_info = session.get("TranscodingInfo", None)
 
-        session_info = "{} - {}".format(user_name, client_name)
+        session_info = f"{user_name} - {client_name}"
         user_session_details = ""
 
         percentage_played = 0
@@ -71,9 +71,7 @@ def show_server_sessions():
                 percentage_played = (position_ticks / float(runtime)) * 100.0
                 percentage_played = int(percentage_played)
 
-            session_info += " {} {}%".format(
-                now_playing.get("Name", "na"), percentage_played
-            )
+            session_info += f" {now_playing.get('Name', 'na')} {percentage_played}%"
             user_session_details += "{} {}%\n".format(
                 now_playing.get("Name", "na"), percentage_played
             )
@@ -101,17 +99,15 @@ def show_server_sessions():
             else:
                 transcoding_details += "Audio:direct\n"
 
-            transcoding_details += "Bitrate:{}\n".format(
-                transcoding_info.get("Bitrate", 0)
-            )
+            transcoding_details += f"Bitrate:{transcoding_info.get('Bitrate', 0)}\n"
 
         list_item = xbmcgui.ListItem(label=session_info)
         list_item.setArt(art)
 
-        user_session_details += "{}({})\n".format(device_name, client_version)
-        user_session_details += "{}\n".format(client_name)
-        user_session_details += "{}\n".format(play_method)
-        user_session_details += "{}\n".format(transcoding_details)
+        user_session_details += f"{device_name}({client_version})\n"
+        user_session_details += f"{client_name}\n"
+        user_session_details += f"{play_method}\n"
+        user_session_details += f"{transcoding_details}\n"
 
         info_labels = {}
         info_labels["duration"] = str(runtime / 10000000)

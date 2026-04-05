@@ -48,12 +48,12 @@ class IntroSkipperService(threading.Thread):
                 play_data = get_playing_data()
                 item_id = play_data.get("item_id", None)
                 if item_id is not None:
-                    log.debug("SkipService: playing item is from jellyfin : {0}".format(item_id))
+                    log.debug(f"SkipService: playing item is from jellyfin : {item_id}")
 
-                    log.debug("SkipService: segments : {0}".format(segments))
+                    log.debug(f"SkipService: segments : {segments}")
                     # If item id has changed or is new, retrieve segments
                     if playing_item_id is None or playing_item_id != item_id:
-                        log.debug("SkipService: item is new, retrieving media segments : {0}".format(item_id))
+                        log.debug(f"SkipService: item is new, retrieving media segments : {item_id}")
                         segments = get_media_segments(item_id)
 
                     # Setting global playing item to current playing item
@@ -64,7 +64,7 @@ class IntroSkipperService(threading.Thread):
                     for segment in segments:
                         segment_type = segment.get("Type")
                         dialog = skip_dialog.get(segment_type, None)
-                        log.debug("SkipService: dialog is: {}".format(dialog))
+                        log.debug(f"SkipService: dialog is: {dialog}")
                         skip_dialog[segment_type] = self.handle_dialog(plugin_path_real, dialog, item_id, current_ticks, player, segment)
 
             else:
@@ -84,7 +84,7 @@ class IntroSkipperService(threading.Thread):
 
         # In case do nothing is selected return
         if skip_action == "2":
-            log.debug("SkipService: ignore {0} is selected".format(type))
+            log.debug(f"SkipService: ignore {type} is selected")
             return None
 
         if dialog is None:
@@ -104,18 +104,18 @@ class IntroSkipperService(threading.Thread):
             is_segment = current_ticks >= dialog.start and current_ticks <= dialog.end
 
             if skip_action == "1" and is_segment:
-                log.debug("SkipService: {0} is set to automatic skip, skipping segment".format(segment_type))
+                log.debug(f"SkipService: {segment_type} is set to automatic skip, skipping segment")
                 # If auto skip is enabled, skips to semgent ends automatically
                 player.seekTime(ticks_to_seconds(dialog.end))
-                xbmcgui.Dialog().notification("JellyCon", "{0} Skipped".format(segment_type))
+                xbmcgui.Dialog().notification("JellyCon", f"{segment_type} Skipped")
             elif skip_action == "0":
                 # Otherwise show skip dialog
                 if is_segment and not dialog.has_been_dissmissed:
-                    log.debug("SkipService: {0} is playing, showing dialog".format(segment_type))
+                    log.debug(f"SkipService: {segment_type} is playing, showing dialog")
                     dialog.show()
                 else:
                     # Could not find doc on what happens when closing a closed dialog, but it seems fine
-                    log.debug("SkipService: {0} is not playing, closing dialog".format(segment_type))
+                    log.debug(f"SkipService: {segment_type} is not playing, closing dialog")
                     dialog.close()
 
         return dialog

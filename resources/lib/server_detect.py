@@ -39,7 +39,7 @@ def check_connection_speed():
     )
 
     progress_dialog = xbmcgui.DialogProgress()
-    message = 'Testing with {0} MB of data'.format(speed_test_data_size)
+    message = f'Testing with {speed_test_data_size} MB of data'
     progress_dialog.create("JellyCon connection speed test", message)
     start_time = time.time()
 
@@ -56,22 +56,22 @@ def check_connection_speed():
                 progress_dialog.update(percentage_done)
                 last_percentage_done = percentage_done
     else:
-        log.error("HTTP response error: {0} {1}".format(response.status_code, response.content))
-        error_message = "HTTP response error: %s\n%s" % (response.status_code, response.content)
+        log.error(f"HTTP response error: {response.status_code} {response.content}")
+        error_message = f"HTTP response error: {response.status_code}\n{response.content}"
         xbmcgui.Dialog().ok("Speed Test Error", error_message)
         return -1
 
     total_data_read_kbits = (total_data_read * 8) / 1000
     total_time = time.time() - start_time
     speed = int(total_data_read_kbits / total_time)
-    log.debug("Finished Connection Speed Test, speed: {0} total_data: {1}, total_time: {2}".format(speed, total_data_read, total_time))
+    log.debug(f"Finished Connection Speed Test, speed: {speed} total_data: {total_data_read}, total_time: {total_time}")
 
     progress_dialog.close()
     del progress_dialog
 
-    heading = "Speed Test Result : {0:,} Kbs".format(speed)
+    heading = f"Speed Test Result : {speed:,} Kbs"
     message = "Do you want to set this speed as your max stream bitrate for playback?\n"
-    message += "{0:,} MB over {1} sec".format(int((total_data_read / 1000000)), total_time)
+    message += f"{int(total_data_read / 1000000):,} MB over {total_time} sec"
 
     response = xbmcgui.Dialog().yesno(heading, message)
     if response:
@@ -92,11 +92,11 @@ def get_server_details():
 
     sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
 
-    log.debug("MutliGroup: {0}".format(multi_group))
-    log.debug("Sending UDP Data: {0}".format(message))
+    log.debug(f"MutliGroup: {multi_group}")
+    log.debug(f"Sending UDP Data: {message}")
 
     progress = xbmcgui.DialogProgress()
-    progress.create('{} : {}'.format(__addon_name__, translate_string(30373)))
+    progress.create(f'{__addon_name__} : {translate_string(30373)}')
     progress.update(0, translate_string(30374))
     xbmc.sleep(1000)
     server_count = 0
@@ -106,18 +106,18 @@ def get_server_details():
         while True:
             try:
                 server_count += 1
-                progress.update(server_count * 10, '{}: {}'.format(translate_string(30375), server_count))
+                progress.update(server_count * 10, f'{translate_string(30375)}: {server_count}')
                 xbmc.sleep(1000)
                 data, addr = sock.recvfrom(1024)
                 servers.append(json.loads(data))
             except:  # noqa
                 break
     except Exception as e:
-        log.error("UPD Discovery Error: {0}".format(e))
+        log.error(f"UPD Discovery Error: {e}")
 
     progress.close()
 
-    log.debug("Found Servers: {0}".format(servers))
+    log.debug(f"Found Servers: {servers}")
     return servers
 
 
@@ -154,14 +154,14 @@ def check_server(force=False, change_user=False, notify=False):
             server_list.append(server_item)
 
         if len(server_list) > 0:
-            return_index = xbmcgui.Dialog().select('{} : {}'.format(__addon_name__, translate_string(30166)),
+            return_index = xbmcgui.Dialog().select(f'{__addon_name__} : {translate_string(30166)}',
                                                    server_list,
                                                    useDetails=True)
             if return_index != -1:
                 api.server = server_info[return_index]["Address"]
 
         if not api.server:
-            return_index = xbmcgui.Dialog().yesno(__addon_name__, '{}\n{}'.format(translate_string(30282), translate_string(30370)))
+            return_index = xbmcgui.Dialog().yesno(__addon_name__, f'{translate_string(30282)}\n{translate_string(30370)}')
             if not return_index:
                 xbmc.executebuiltin("ActivateWindow(Home)")
                 return
@@ -181,24 +181,24 @@ def check_server(force=False, change_user=False, notify=False):
                     return
 
                 progress = xbmcgui.DialogProgress()
-                progress.create('{} : {}'.format(__addon_name__, translate_string(30376)))
+                progress.create(f'{__addon_name__} : {translate_string(30376)}')
                 progress.update(0, translate_string(30377))
                 result = api.get('/System/Info/Public')
                 progress.close()
 
                 if result:
-                    xbmcgui.Dialog().ok('{} : {}'.format(__addon_name__, translate_string(30167)),
+                    xbmcgui.Dialog().ok(f'{__addon_name__} : {translate_string(30167)}',
                                         api.server)
                     break
                 else:
-                    return_index = xbmcgui.Dialog().yesno('{} : {}'.format(__addon_name__, translate_string(30135)),
+                    return_index = xbmcgui.Dialog().yesno(f'{__addon_name__} : {translate_string(30135)}',
                                                           api.server,
                                                           translate_string(30371))
                     if not return_index:
                         xbmc.executebuiltin("ActivateWindow(Home)")
                         return
 
-        log.debug("Selected server: {0}".format(api.server))
+        log.debug(f"Selected server: {api.server}")
         settings.setSetting("server_address", api.server)
         something_changed = True
 
@@ -232,8 +232,8 @@ def check_server(force=False, change_user=False, notify=False):
             if quick_connect:
                 # Try to authenticate to server with secret code 10 times
                 while count < 10:
-                    log.debug('Checking for quick connect auth: attempt {}'.format(count))
-                    check = api.get('/QuickConnect/Connect?secret={}'.format(secret))
+                    log.debug(f'Checking for quick connect auth: attempt {count}')
+                    check = api.get(f'/QuickConnect/Connect?secret={secret}')
                     if check.get('Authenticated'):
                         break
                     count += 1
@@ -264,7 +264,7 @@ def check_server(force=False, change_user=False, notify=False):
                     kb.doModal()
                     if kb.isConfirmed():
                         selected_user_name = kb.getText()
-                        log.debug("Manual entered username: {0}".format(selected_user_name))
+                        log.debug(f"Manual entered username: {selected_user_name}")
                     else:
                         return
 
@@ -288,7 +288,7 @@ def check_server(force=False, change_user=False, notify=False):
                     if not auth:
                         # Login failed, we don't want to change anything
                         something_changed = False
-                        log.info('There was an error logging in with user {}'.format(selected_user_name))
+                        log.info(f'There was an error logging in with user {selected_user_name}')
                         xbmcgui.Dialog().ok(__addon_name__, translate_string(30446))
 
         if something_changed:
@@ -388,21 +388,21 @@ def create_user_listitem(server, user):
             ago = now - last_active_date
             # Check days
             if ago.days > 0:
-                time_ago += ' {}d'.format(ago.days)
+                time_ago += f' {ago.days}d'
             # Check minutes
             if ago.seconds > 60:
                 hours = 0
                 # Check hours
                 if ago.seconds > 3600:
                     hours = int(ago.seconds/3600)
-                    time_ago += ' {}h'.format(hours)
+                    time_ago += f' {hours}h'
                 minutes = int((ago.seconds - (hours * 3600)) / 60)
-                time_ago += ' {}m'.format(minutes)
+                time_ago += f' {minutes}m'
             time_ago = time_ago.strip()
             if not time_ago:
                 time_ago = "Active: now"
             else:
-                time_ago = "Active: {} ago".format(time_ago)
+                time_ago = f"Active: {time_ago} ago"
 
         user_item = xbmcgui.ListItem(name)
 

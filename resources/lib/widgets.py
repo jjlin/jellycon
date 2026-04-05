@@ -45,7 +45,7 @@ def set_random_movies():
     url_params["IncludeItemTypes"] = "Movie"
     url_params["ImageTypeLimit"] = 0
 
-    url = get_jellyfin_url("/Users/{}/Items".format(user_id), url_params)
+    url = get_jellyfin_url(f"/Users/{user_id}/Items", url_params)
 
     results = api.get(url)
 
@@ -62,8 +62,8 @@ def set_random_movies():
     m.update(movies_list_string.encode())
     new_widget_hash = m.hexdigest()
 
-    log.debug("set_random_movies : {0}".format(movies_list_string))
-    log.debug("set_random_movies : {0}".format(new_widget_hash))
+    log.debug(f"set_random_movies : {movies_list_string}")
+    log.debug(f"set_random_movies : {new_widget_hash}")
     home_window.set_property("random-movies", movies_list_string)
     home_window.set_property("random-movies-changed", new_widget_hash)
 
@@ -85,7 +85,7 @@ def set_random_tvshows():
     url_params["IncludeItemTypes"] = "Series"
     url_params["ImageTypeLimit"] = 0
 
-    url = get_jellyfin_url("/Users/{}/Items".format(user_id), url_params)
+    url = get_jellyfin_url(f"/Users/{user_id}/Items", url_params)
 
     results = api.get(url)
 
@@ -102,8 +102,8 @@ def set_random_tvshows():
     m.update(tvshow_list_string.encode())
     new_widget_hash = m.hexdigest()
 
-    log.debug("set_random_tvshows: {0}".format(tvshow_list_string))
-    log.debug("set_random_tvshows: {0}".format(new_widget_hash))
+    log.debug(f"set_random_tvshows: {tvshow_list_string}")
+    log.debug(f"set_random_tvshows: {new_widget_hash}")
     home_window.set_property("random-tvshows", tvshow_list_string)
     home_window.set_property("random-tvshows-changed", new_widget_hash)
 
@@ -125,7 +125,7 @@ def set_random_all():
     url_params["IncludeItemTypes"] = "Movie,Series"
     url_params["ImageTypeLimit"] = 0
    
-    url = get_jellyfin_url("/Users/{}/Items".format(user_id), url_params)
+    url = get_jellyfin_url(f"/Users/{user_id}/Items", url_params)
 
     results = api.get(url)
 
@@ -142,13 +142,13 @@ def set_random_all():
     m.update(item_list_string.encode())
     new_widget_hash = m.hexdigest()
 
-    log.debug("set_random_all: {0}".format(item_list_string))
-    log.debug("set_random_all: {0}".format(new_widget_hash))
+    log.debug(f"set_random_all: {item_list_string}")
+    log.debug(f"set_random_all: {new_widget_hash}")
     home_window.set_property("random-all", item_list_string)
     home_window.set_property("random-all-changed", new_widget_hash)
 
 def set_background_image(force=False):
-    log.debug("set_background_image Called forced={0}".format(force))
+    log.debug(f"set_background_image Called forced={force}")
 
     global background_current_item
     global background_items
@@ -174,7 +174,7 @@ def set_background_image(force=False):
         url_params["IncludeItemTypes"] = "Movie,Series"
         url_params["ImageTypeLimit"] = 1
 
-        url = get_jellyfin_url('/Users/{}/Items'.format(user_id), url_params)
+        url = get_jellyfin_url(f'/Users/{user_id}/Items', url_params)
 
         results = api.get(url)
 
@@ -200,9 +200,7 @@ def set_background_image(force=False):
         bg_image = background_items[background_current_item].get("image")
         label = background_items[background_current_item].get("name")
         log.debug(
-            "set_background_image: {0} - {1} - {2}".format(
-                background_current_item, label, bg_image
-            )
+            f"set_background_image: {background_current_item} - {label} - {bg_image}"
         )
 
         background_current_item += 1
@@ -227,7 +225,7 @@ def check_for_new_content():
         log.debug("Using simple new content check")
         current_time_stamp = str(time.time())
         home_window.set_property("jellycon_widget_reload", current_time_stamp)
-        log.debug("Setting New Widget Hash: {0}".format(current_time_stamp))
+        log.debug(f"Setting New Widget Hash: {current_time_stamp}")
         return
     user_id = get_current_user_id()
 
@@ -240,10 +238,10 @@ def check_for_new_content():
     url_params["IncludeItemTypes"] = "Movie,Episode"
     url_params["ImageTypeLimit"] = 0
 
-    added_url = get_jellyfin_url('/Users/{}/Items'.format(user_id), url_params)
+    added_url = get_jellyfin_url(f'/Users/{user_id}/Items', url_params)
 
     result = api.get(added_url)
-    log.debug("LATEST_ADDED_ITEM: {0}".format(result))
+    log.debug(f"LATEST_ADDED_ITEM: {result}")
 
     last_added_date = ""
     if result is not None:
@@ -251,7 +249,7 @@ def check_for_new_content():
         if len(items) > 0:
             item = items[0]
             last_added_date = item.get("Etag", "")
-    log.debug("last_added_date: {0}".format(last_added_date))
+    log.debug(f"last_added_date: {last_added_date}")
 
     url_params = {}
     url_params["Recursive"] = True
@@ -263,11 +261,11 @@ def check_for_new_content():
     url_params["ImageTypeLimit"] = 0
 
     played_url = get_jellyfin_url(
-        '/Users/{}/Items'.format(user_id), url_params
+        f'/Users/{user_id}/Items', url_params
     )
 
     result = api.get(played_url)
-    log.debug("LATEST_PLAYED_ITEM: {0}".format(result))
+    log.debug(f"LATEST_PLAYED_ITEM: {result}")
 
     last_played_date = ""
     if result is not None:
@@ -278,32 +276,32 @@ def check_for_new_content():
             if user_data is not None:
                 last_played_date = user_data.get("LastPlayedDate", "")
 
-    log.debug("last_played_date: {0}".format(last_played_date))
+    log.debug(f"last_played_date: {last_played_date}")
 
     current_widget_hash = home_window.get_property("jellycon_widget_reload")
-    log.debug("Current Widget Hash: {0}".format(current_widget_hash))
+    log.debug(f"Current Widget Hash: {current_widget_hash}")
 
     m = hashlib.md5()
     m.update((last_played_date + last_added_date).encode())
     new_widget_hash = m.hexdigest()
-    log.debug("New Widget Hash: {0}".format(new_widget_hash))
+    log.debug(f"New Widget Hash: {new_widget_hash}")
 
     if current_widget_hash != new_widget_hash:
         home_window.set_property("jellycon_widget_reload", new_widget_hash)
-        log.debug("Setting New Widget Hash: {0}".format(new_widget_hash))
+        log.debug(f"Setting New Widget Hash: {new_widget_hash}")
 
 
 @timer
 def get_widget_content_cast(handle, params):
-    log.debug("getWigetContentCast Called: {0}".format(params))
+    log.debug(f"getWigetContentCast Called: {params}")
     settings = xbmcaddon.Addon()
     server = settings.getSetting('server_address')
     user_id = get_current_user_id()
 
     item_id = params["id"]
     result = api.get(
-        "/Users/{}/Items/{}".format(user_id, item_id))
-    log.debug("ItemInfo: {0}".format(result))
+        f"/Users/{user_id}/Items/{item_id}")
+    log.debug(f"ItemInfo: {result}")
 
     if not result:
         return
@@ -362,7 +360,7 @@ def get_widget_content_cast(handle, params):
 
 @timer
 def get_widget_content(handle, params):
-    log.debug("getWigetContent Called: {0}".format(params))
+    log.debug(f"getWigetContent Called: {params}")
 
     settings = xbmcaddon.Addon()
     item_limit = int(settings.getSetting("show_x_filtered_items"))
@@ -376,9 +374,9 @@ def get_widget_content(handle, params):
         return
     user_id = get_current_user_id()
 
-    log.debug("widget_type: {0}".format(widget_type))
+    log.debug(f"widget_type: {widget_type}")
 
-    url_verb = "/Users/{}/Items".format(user_id)
+    url_verb = f"/Users/{user_id}/Items"
     url_params = {}
     url_params["Limit"] = item_limit
     url_params["Fields"] = get_default_filters()
@@ -419,7 +417,7 @@ def get_widget_content(handle, params):
 
     elif widget_type == "recent_tvshows":
         xbmcplugin.setContent(handle, 'episodes')
-        url_verb = '/Users/{}/Items/Latest'.format(user_id)
+        url_verb = f'/Users/{user_id}/Items/Latest'
         url_params["GroupItems"] = True
         url_params["Limit"] = 45
         url_params["Recursive"] = True
@@ -471,7 +469,7 @@ def get_widget_content(handle, params):
             url_params["nextUpDateCutoff"] = rewatch_since.strftime("%Y-%m-%d")
             url_params["enableRewatching"] = True
         # Collect InProgress items to be combined with NextUp
-        inprogress_url_verb = "/Users/{}/Items".format(user_id)
+        inprogress_url_verb = f"/Users/{user_id}/Items"
         inprogress_url_params = url_params.copy()
         inprogress_url_params["Recursive"] = True
         inprogress_url_params["SortBy"] = "DatePlayed"
@@ -498,9 +496,7 @@ def get_widget_content(handle, params):
         while len(ids) < item_limit and suggested_items:
             items = suggested_items[set_id]
             log.debug(
-                "BaselineItemName : {0} - {1}".format(
-                    set_id, items.get("BaselineItemName")
-                )
+                f"BaselineItemName : {set_id} - {items.get('BaselineItemName')}"
             )
             items = items["Items"]
             rand = random.randint(0, len(items) - 1)
@@ -519,7 +515,7 @@ def get_widget_content(handle, params):
                 set_id = 0
 
         id_list = ",".join(ids)
-        log.debug("Recommended Items : {0}".format(len(ids)))
+        log.debug(f"Recommended Items : {len(ids)}")
         url_params["Ids"] = id_list
 
     elif widget_type == "random_all":
@@ -529,7 +525,7 @@ def get_widget_content(handle, params):
 
     elif widget_type == "recent_all":
         xbmcplugin.setContent(handle, 'movies')
-        url_verb = '/Users/{}/Items/Latest'.format(user_id)
+        url_verb = f'/Users/{user_id}/Items/Latest'
         url_params["GroupItems"] = True
         url_params["Recursive"] = True
         url_params["SortBy"] = "DateCreated"
@@ -588,7 +584,7 @@ def get_widget_content(handle, params):
 
     if detected_type is not None:
         # if the media type is not set then try to use the detected type
-        log.debug("Detected content type: {0}".format(detected_type))
+        log.debug(f"Detected content type: {detected_type}")
         content_type = None
 
         if detected_type == "Movie":
