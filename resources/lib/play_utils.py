@@ -220,6 +220,15 @@ def get_playback_intros(item_id):
 
 @timer
 def play_file(play_info):
+    """
+    If a jellycon item is already playing, report it's playback has stopped
+    to the server to preserve accurate tracking
+    """
+    if xbmc.Player().isPlaying():
+        play_data = get_playing_data()
+        if play_data:
+            report_stopped_playback(play_data)
+
     item_id = play_info.get("item_id")
 
     channel_id = None
@@ -1140,29 +1149,9 @@ def stop_all_playback():
             log.debug("item_data: {0}".format(data))
 
             current_position = data.get("current_position", 0)
-            duration = data.get("duration", 0)
             jellyfin_item_id = data.get("item_id")
-            jellyfin_source_id = data.get("source_id")
-            play_session_id = data.get("play_session_id")
-            livestream_id = data.get('livestream_id')
-
+            report_stopped_playback(data)
             if jellyfin_item_id is not None and current_position >= 0:
-                log.debug("Playback Stopped at: {0}".format(current_position))
-
-                url = "/Sessions/Playing/Stopped"
-                postdata = {
-                    'ItemId': jellyfin_item_id,
-                    'MediaSourceId': jellyfin_source_id,
-                    'PositionTicks': int(current_position * 10000000),
-                    'RunTimeTicks': int(duration * 10000000),
-                    'PlaySessionId': play_session_id
-                }
-
-                # If this is a livestream, include the id in the stopped call
-                if livestream_id:
-                    postdata['LiveStreamId'] = livestream_id
-
-                api.post(url, postdata)
                 data["currently_playing"] = False
 
                 if data.get("play_action_type", "") == "play":
@@ -1386,8 +1375,6 @@ class Service(xbmc.Player):
 
     def onPlayBackStarted(self):
         # Will be called when xbmc starts playing a file
-        stop_all_playback()
-
         if not xbmc.Player().isPlaying():
             log.debug("onPlayBackStarted: not playing file!")
             return
@@ -1751,3 +1738,31 @@ def get_media_segments(item_id):
         log.debug("GetMediaSegments : Media segments cloud not be retrieved")
         return None
     return result["Items"]
+
+
+def report_stopped_playback(data):
+    # Send an api message to the server reporting playback has stopped
+    current_position = data.get("current_position", 0)
+    duration = data.get("duration", 0)
+    jellyfin_item_id = data.get("item_id")
+    jellyfin_source_id = data.get("source_id")
+    play_session_id = data.get("play_session_id")
+    livestream_id = data.get('livestream_id')
+
+    if jellyfin_item_id is not None and current_position >= 0:
+        log.debug("Playback Stopped at: {0}".format(current_position))
+
+        url = "/Sessions/Playing/Stopped"
+        postdata = {
+            'ItemId': jellyfin_item_id,
+            'MediaSourceId': jellyfin_source_id,
+            'PositionTicks': int(current_position * 10000000),
+            'RunTimeTicks': int(duration * 10000000),
+            'PlaySessionId': play_session_id
+        }
+
+        # If this is a livestream, include the id in the stopped call
+        if livestream_id:
+            postdata['LiveStreamId'] = livestream_id
+
+        api.post(url, postdata)
