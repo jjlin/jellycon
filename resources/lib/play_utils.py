@@ -1161,6 +1161,7 @@ def stop_all_playback():
 
             if data.get('playback_type') == 'Transcode':
                 device_id = get_device_id()
+                play_session_id = data.get("play_session_id")
                 url = "/Videos/ActiveEncodings?DeviceId=%s&playSessionId=%s" % (device_id, play_session_id)
                 api.delete(url)
 
