@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-03-10 10:44+0000\n"
+"PO-Revision-Date: 2026-07-05 08:08+0000\n"
 "Last-Translator: nextlooper42 <nextlooper42@protonmail.com>\n"
 "Language-Team: Slovak <https://translate.jellyfin.org/projects/jellycon/"
 "jellycon/sk/>\n"
@@ -1223,3 +1223,19 @@ msgstr "Všetko - Obľúbené"
 msgctxt "#30678"
 msgid "TV Shows per page"
 msgstr "Seriály na stránku"
+
+msgctxt "#30679"
+msgid "Quick Connect: Enter code {} on another device to authorize"
+msgstr "Rýchle pripojenie: Na autorizáciu zadajte kód {} na inom zariadení"
+
+msgctxt "#30680"
+msgid "Waiting for authorization... ({}/{})"
+msgstr "Čaká sa na autorizáciu... ({}/{})"
+
+msgctxt "#30681"
+msgid "Quick Connect authentication failed. Please try again."
+msgstr "Autorizácia Rýchleho pripojenia zlyhala. Skúste to prosím znova."
+
+msgctxt "#30682"
+msgid "Quick Connect timed out. Please try again."
+msgstr "Vypršal časový limit Rýchleho pripojenia. Skúste to prosím znova."
