@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-07-05 08:08+0000\n"
+"PO-Revision-Date: 2026-07-06 06:22+0000\n"
 "Last-Translator: Ulrik <ulrik.johansen@me.com>\n"
 "Language-Team: Danish <https://translate.jellyfin.org/projects/jellycon/"
 "jellycon/da/>\n"
@@ -61,7 +61,7 @@ msgstr "N/A"
 
 msgctxt "#30110"
 msgid "Interface"
-msgstr "Grænseflade"
+msgstr "Brugerflade"
 
 msgctxt "#30111"
 msgid "Services"
@@ -93,7 +93,7 @@ msgstr "Medtag plot"
 
 msgctxt "#30183"
 msgid "Include people"
-msgstr "Inkludere mennesker"
+msgstr "Inkludér personer"
 
 msgctxt "#30200"
 msgid "URL error"
@@ -121,7 +121,7 @@ msgstr "Fremtving 8-bit videotilstand"
 
 msgctxt "#30216"
 msgid "Item Details"
-msgstr "Emne detaljer"
+msgstr "Elementdetaljer"
 
 msgctxt "#30227"
 msgid "Simple"
@@ -141,7 +141,7 @@ msgstr "Indstillinger for afspilning af stream"
 
 msgctxt "#30241"
 msgid "Force transcode mpeg4"
-msgstr "Fremtving transcode mpeg4"
+msgstr "Tving transkodning til MPEG-4"
 
 msgctxt "#30246"
 msgid "Search"
@@ -153,19 +153,19 @@ msgstr "Ukendt"
 
 msgctxt "#30258"
 msgid "Movies - In Progress"
-msgstr "Film - i gang"
+msgstr "Film - I gang"
 
 msgctxt "#30259"
 msgid "Movies - Favorites"
-msgstr "Film - favoritter"
+msgstr "Film - Favoritter"
 
 msgctxt "#30261"
 msgid "TV Shows"
-msgstr "TV-serier"
+msgstr "Serier"
 
 msgctxt "#30275"
 msgid "Force Transcode"
-msgstr "Fremtving transcode"
+msgstr "Tving transkodning"
 
 msgctxt "#30276"
 msgid "Extra Resume Prompt Detected"
@@ -173,7 +173,7 @@ msgstr "Ekstra genoptagelsesprompt registreret"
 
 msgctxt "#30283"
 msgid "Play Next Episode?"
-msgstr "Afspil næste afsnit?"
+msgstr "Afspil næste episode?"
 
 msgctxt "#30288"
 msgid " - Latest"
@@ -185,7 +185,7 @@ msgstr "Alle"
 
 msgctxt "#30291"
 msgid "Select Audio Stream"
-msgstr "Vælg Audio Stream"
+msgstr "Vælg lydstrøm"
 
 msgctxt "#30298"
 msgid "Deleting Kodi Images"
@@ -193,7 +193,7 @@ msgstr "Sletter Kodi-billeder"
 
 msgctxt "#30299"
 msgid "Cache Images"
-msgstr "Cache billeder"
+msgstr "Cache-billeder"
 
 msgctxt "#30301"
 msgid "Caching Images"
@@ -253,7 +253,7 @@ msgstr "Gå til sæson"
 
 msgctxt "#30329"
 msgid "Screensaver"
-msgstr "Skærmskåner"
+msgstr "Pauseskærm"
 
 msgctxt "#30330"
 msgid "Show change user dialog"
@@ -357,7 +357,7 @@ msgstr "Ubrugte Jellyfin-billeder:"
 
 msgctxt "#30388"
 msgid "Server details"
-msgstr "Server detaljer"
+msgstr "Serveroplysninger"
 
 msgctxt "#30390"
 msgid "Protocol"
@@ -389,7 +389,7 @@ msgstr "Film - anbefalinger"
 
 msgctxt "#30404"
 msgid " - A-Z"
-msgstr "- A-Z"
+msgstr "- A-Å"
 
 msgctxt "#30405"
 msgid " - Show All"
@@ -417,7 +417,7 @@ msgstr "- Favoritter"
 
 msgctxt "#30416"
 msgid "HTTP timeout seconds"
-msgstr "HTTP timeout sekunder"
+msgstr "HTTP-timeout i sekunder"
 
 msgctxt "#30420"
 msgid "Audio max channels"
@@ -461,7 +461,7 @@ msgstr "Brug cachelagrede widget data"
 
 msgctxt "#30443"
 msgid "Quick Connect"
-msgstr "Hurtig tilslutning"
+msgstr "Lyn-forbind"
 
 msgctxt "#30447"
 msgid "Max Play Queue Size"
@@ -477,11 +477,11 @@ msgstr "Øjeblikkelig Mix"
 
 msgctxt "#30000"
 msgid "Host"
-msgstr "Host"
+msgstr "Vært"
 
 msgctxt "#30003"
 msgid "Verify HTTPS certificate"
-msgstr "Verificere HTTPS-certifikat"
+msgstr "Bekræft HTTPS-certifikatet"
 
 msgctxt "#30005"
 msgid "Username"
@@ -489,11 +489,11 @@ msgstr "Brugernavn"
 
 msgctxt "#30007"
 msgid "Samba username"
-msgstr "Samba brugernavn"
+msgstr "Samba-brugernavn"
 
 msgctxt "#30011"
 msgid "[Detect local server]"
-msgstr "[Opdag lokal server}"
+msgstr "[Find lokal server]"
 
 msgctxt "#30014"
 msgid "Jellyfin"
@@ -557,11 +557,11 @@ msgstr "Henter data"
 
 msgctxt "#30114"
 msgid "Jump back seconds"
-msgstr "Hop sekunder tilbage"
+msgstr "Spring sekunder tilbage"
 
 msgctxt "#30116"
 msgid "Add unwatched counts to names"
-msgstr "Tilføj uovervågede tællinger til navne"
+msgstr "Tilføj antallet af ikke-sete til navnene"
 
 msgctxt "#30010"
 msgid "Number of performance profiles to capture"
@@ -609,7 +609,7 @@ msgstr "Afspilning"
 
 msgctxt "#30210"
 msgid "HTTP direct stream"
-msgstr "HTTP direkte stream"
+msgstr "HTTP-direkte stream"
 
 msgctxt "#30211"
 msgid "Transcode options"
@@ -653,7 +653,7 @@ msgstr "Interaktion"
 
 msgctxt "#30225"
 msgid "Interface Mode"
-msgstr "Grænseflade-tilstand"
+msgstr "Brugerflade-tilstand"
 
 msgctxt "#30226"
 msgid "Default"
@@ -661,11 +661,11 @@ msgstr "Standard"
 
 msgctxt "#30229"
 msgid "TV Shows"
-msgstr "TV-serier"
+msgstr "Serier"
 
 msgctxt "#30236"
 msgid "Force transcode h265 (hevc)"
-msgstr "Fremtving transcode h265 (hevc)"
+msgstr "Tving transkodning til H.265 (HEVC)"
 
 msgctxt "#30237"
 msgid "Start from beginning"
@@ -673,11 +673,11 @@ msgstr "Start fra begyndelsen"
 
 msgctxt "#30239"
 msgid "Force transcode mpeg2"
-msgstr "Fremtving transcode mpeg2"
+msgstr "Tving transkodning til MPEG-2"
 
 msgctxt "#30240"
 msgid "Force transcode msmpeg4v3 (divx)"
-msgstr "Fremtving transcode msmpeg4v3 (divx)"
+msgstr "Tving transkodning med msmpeg4v3 (DivX)"
 
 msgctxt "#30247"
 msgid "Custom Widget Content"
@@ -689,7 +689,7 @@ msgstr "Film - Genrer"
 
 msgctxt "#30252"
 msgid "Movies - A-Z"
-msgstr "Film - A-Z"
+msgstr "Film - A-Å"
 
 msgctxt "#30254"
 msgid "Show add-on settings"
@@ -697,7 +697,7 @@ msgstr "Vis tilføjelsesindstillinger"
 
 msgctxt "#30255"
 msgid "TV Shows - A-Z"
-msgstr "TV-serier - A-Z"
+msgstr "Serier - A-Å"
 
 msgctxt "#30256"
 msgid "Movies"
@@ -705,7 +705,7 @@ msgstr "Film"
 
 msgctxt "#30257"
 msgid "Movies - Recently Added"
-msgstr "Film - for nylig tilføjet"
+msgstr "Film – Nyligt tilføjede"
 
 msgctxt "#30260"
 msgid "BoxSets"
@@ -713,23 +713,23 @@ msgstr "Bokssæt"
 
 msgctxt "#30262"
 msgid "TV Shows - Favorites"
-msgstr "TV-serier - favoritter"
+msgstr "Serier - Favoritter"
 
 msgctxt "#30263"
 msgid "Episodes - Recently Added"
-msgstr "Episoder - for nyligt tilføjet"
+msgstr "Episoder – Nyligt tilføjede"
 
 msgctxt "#30264"
 msgid "Episodes - In Progress"
-msgstr "Episoder - i gang"
+msgstr "Episoder - I gang"
 
 msgctxt "#30265"
 msgid "Episodes - Next Up"
-msgstr "Episoder - næste gang"
+msgstr "Episoder - Næste"
 
 msgctxt "#30266"
 msgid "Movies - Pages"
-msgstr "Film - sider"
+msgstr "Film - Sider"
 
 msgctxt "#30267"
 msgid " - In Progress"
@@ -737,23 +737,23 @@ msgstr "- I gang"
 
 msgctxt "#30268"
 msgid " - Recently Added"
-msgstr "- For nylig tilføjet"
+msgstr "- Nyligt tilføjede"
 
 msgctxt "#30269"
 msgid "Movies - Random"
-msgstr "Film - tilfældig"
+msgstr "Film - Tilfældig"
 
 msgctxt "#30270"
 msgid "Mark Watched"
-msgstr "Markere set"
+msgstr "Markér som Set"
 
 msgctxt "#30271"
 msgid "Mark Unwatched"
-msgstr "Markere uset"
+msgstr "Markér som Ikke-set"
 
 msgctxt "#30272"
 msgid "Set Favourite"
-msgstr "Sæt som favorit"
+msgstr "Angiv som favorit"
 
 msgctxt "#30273"
 msgid "Unset Favourite"
@@ -766,17 +766,17 @@ msgstr "Slet"
 msgctxt "#30277"
 msgid "JellyCon needs to prompt for resume on partily played items, Kodi can also prompt, this can cause a double prompt. Do you want to remove the double prompt?"
 msgstr ""
-"JellyCon skal bede om genoptagelse på delvist afspillede elementer, Kodi kan "
-"også bede om det, og det kan forårsage en dobbelt prompt. Vil du fjerne den "
-"dobbelte prompt?"
+"JellyCon skal spørge, om man vil fortsætte afspilningen af delvist "
+"afspillede indholdselementer, og Kodi kan også spørge om det, hvilket kan "
+"medføre en dobbelt forespørgsel. Vil du fjerne den dobbelte forespørgsel?"
 
 msgctxt "#30278"
 msgid " - Next Up"
-msgstr "- Næste gang"
+msgstr "- Næste"
 
 msgctxt "#30279"
 msgid "TV Shows - Unwatched"
-msgstr "TV-serier - ikke set"
+msgstr "Serier - Ikke set"
 
 msgctxt "#30280"
 msgid "Missing Title"
@@ -784,7 +784,7 @@ msgstr "Mangler titel"
 
 msgctxt "#30281"
 msgid "Refresh Cached Images"
-msgstr "Opdater cachede billeder"
+msgstr "Genopfrisk billeder i cachen"
 
 msgctxt "#30282"
 msgid "No Jellyfin servers detected on your local network."
@@ -796,23 +796,23 @@ msgstr "- Ikke set"
 
 msgctxt "#30286"
 msgid "Movies - Unwatched"
-msgstr "Film - ikke set"
+msgstr "Film - Ikke set"
 
 msgctxt "#30287"
 msgid "TV Shows - Latest"
-msgstr "TV-serier - seneste"
+msgstr "Serier - Seneste"
 
 msgctxt "#30289"
 msgid "TV Shows - Genres"
-msgstr "TV-serier - Genrer"
+msgstr "Serier - Genrer"
 
 msgctxt "#30292"
 msgid "Select Subtitle Stream"
-msgstr "Vælg undertekst-stream"
+msgstr "Vælg undertekststrøm"
 
 msgctxt "#30293"
 msgid "Cache images"
-msgstr "Cache billeder"
+msgstr "Cache-billeder"
 
 msgctxt "#30294"
 msgid "Notice"
@@ -876,15 +876,15 @@ msgstr "Vis tomme mapper (serier, sæsoner, samlinger)"
 
 msgctxt "#30332"
 msgid "Stop media playback on screensaver activation"
-msgstr "Stop medieafspilning ved aktivering af skærmskåner"
+msgstr "Stop afspilning af medier, når pauseskærmen aktiveres"
 
 msgctxt "#30333"
 msgid "Cache artwork in the background"
-msgstr "Cache kunstværk i baggrunden"
+msgstr "Cache billeder i baggrunden"
 
 msgctxt "#30334"
 msgid "Use JellyCon context menu"
-msgstr "Brug JellyCon kontekstmenu"
+msgstr "Brug JellyCon-kontekstmenuen"
 
 msgctxt "#30337"
 msgid "Song"
@@ -916,15 +916,15 @@ msgstr "Henter eksisterende billeder"
 
 msgctxt "#30350"
 msgid "Music - Recently Added"
-msgstr "Musik - for nylig tilføjet"
+msgstr "Musik – Nyligt tilføjede"
 
 msgctxt "#30351"
 msgid "Music - Recently Played"
-msgstr "Musik - afspillet for nylig"
+msgstr "Musik – Senest afspillet"
 
 msgctxt "#30352"
 msgid "Music - Frequently Played"
-msgstr "Musik - ofte afspillet"
+msgstr "Musik – Ofte afspillet"
 
 msgctxt "#30321"
 msgid " - Album Artists"
@@ -1010,7 +1010,7 @@ msgstr "Ubrugte billeder fjernet:"
 
 msgctxt "#30389"
 msgid "User details"
-msgstr "Bruger detaljer"
+msgstr "Brugerdetaljer"
 
 msgctxt "#30393"
 msgid "Clear Cache Result"
@@ -1038,7 +1038,7 @@ msgstr "Tilføj til Kodi-spilleliste"
 
 msgctxt "#30406"
 msgid "Jellyfin Libraries"
-msgstr "Jellyfin biblioteker"
+msgstr "Jellyfin-biblioteker"
 
 msgctxt "#30409"
 msgid "Add-on Actions"
@@ -1054,7 +1054,7 @@ msgstr "- Årtier"
 
 msgctxt "#30415"
 msgid " - Favorite Collections"
-msgstr "- Favorit samlinger"
+msgstr "- Favoritsamlinger"
 
 msgctxt "#30417"
 msgid "You do not have permision to delete this item"
@@ -1070,7 +1070,7 @@ msgstr "Lyd codec"
 
 msgctxt "#30422"
 msgid "Sorting"
-msgstr "Sorterer"
+msgstr "Sortering"
 
 msgctxt "#30424"
 msgid "Default"
@@ -1098,7 +1098,7 @@ msgstr "Skjul sete elementer på lister"
 
 msgctxt "#30434"
 msgid "Force transcode stream bitrate (Kbits)"
-msgstr "Fremtving transcode stream bitrate (Kbps)"
+msgstr "Tving transkodning af streamens bithastighed (Kbps)"
 
 msgctxt "#30436"
 msgid "Speed test data size (MB)"
@@ -1122,7 +1122,7 @@ msgstr "Simpelt nyt indholdstjek"
 
 msgctxt "#30444"
 msgid "Login using Quick Connect"
-msgstr "Log på med hurtig tilslutning"
+msgstr "Log på med Lyn-forbind"
 
 msgctxt "#30445"
 msgid "Continue Watching"
@@ -1146,7 +1146,7 @@ msgstr "Skjul antal emner der vises på starttitlen"
 
 msgctxt "#30242"
 msgid "Force transcode av1"
-msgstr "Tving transkodning av1"
+msgstr "Tving transkodning af AV1"
 
 msgctxt "#30452"
 msgid "Combine instead of replace (might cause slow-down)"
@@ -1154,7 +1154,7 @@ msgstr "Kombiner i stedet for at erstatte (kan forårsage forsinkelse)"
 
 msgctxt "#30454"
 msgid " - Totally Unwatched"
-msgstr " Fuldstændig uset"
+msgstr " - Helt uset"
 
 msgctxt "#30666"
 msgid "Segment Skipper"
@@ -1174,11 +1174,11 @@ msgstr "Slut forskudning (sekunder)"
 
 msgctxt "#30670"
 msgid "Intro Skipper"
-msgstr "Intro overspringer"
+msgstr "Spring over intro"
 
 msgctxt "#30671"
 msgid "Credit Skipper"
-msgstr "Rulletækst overspringer"
+msgstr "Spring over rulletekster"
 
 msgctxt "#30672"
 msgid "Skip"
@@ -1194,12 +1194,48 @@ msgstr "Gør ingenting"
 
 msgctxt "#30675"
 msgid "Commercial Skipper"
-msgstr "Reklame overspringer"
+msgstr "Spring over reklamer"
 
 msgctxt "#30676"
 msgid "Preview Skipper"
-msgstr "Forfilm overspringer"
+msgstr "Spring over forsmag"
 
 msgctxt "#30677"
 msgid "Recap Skipper"
-msgstr "Opsummerings overspringer"
+msgstr "Spring over resumé"
+
+msgctxt "#30455"
+msgid "TV Shows - Random"
+msgstr "Serier - Tilfældig"
+
+msgctxt "#30456"
+msgid "All - Random"
+msgstr "Alle - Tilfældig"
+
+msgctxt "#30457"
+msgid "All - Recently Added"
+msgstr "Alle - Tilføjet for nyligt"
+
+msgctxt "#30458"
+msgid "All - Favorites"
+msgstr "Alle - Favoritter"
+
+msgctxt "#30678"
+msgid "TV Shows per page"
+msgstr "Serier pr. side"
+
+msgctxt "#30679"
+msgid "Quick Connect: Enter code {} on another device to authorize"
+msgstr "Lyn-forbind: Indtast koden {} på en anden enhed for at godkende"
+
+msgctxt "#30680"
+msgid "Waiting for authorization... ({}/{})"
+msgstr "Venter på godkendelse... ({}/{})"
+
+msgctxt "#30681"
+msgid "Quick Connect authentication failed. Please try again."
+msgstr "Godkendelse med Lyn-forbind mislykkedes. Prøv igen."
+
+msgctxt "#30682"
+msgid "Quick Connect timed out. Please try again."
+msgstr "Lyn-forbind fik timeout. Prøv igen."
